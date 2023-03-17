@@ -1,0 +1,24 @@
+{% extends "master.html" %}
+
+{% block title %}
+    Detalles sobre{{myclientes.Ususario}} {{ myclientes.Orden}}
+{% endblock %}
+
+{% block content %}
+<div class="mycard">
+  <h1>{{ myclientes.Firstname }} {{ myclientes.Lastname }}</h1>
+  
+  <p>Orden: {{myclientes.Orden}}</p>
+  <p>Phone: {{ myclientes.Phone }}</p>
+  <p>Beneficiario: {{myclientes.Beneficiario}}</p>
+  <p>Concepto: {{ myclientes.Concepto }}</p>
+  <p>Cantidad: {{ myclientes.Cantidad }}</p>
+  <p>Banco: {{myclientes.Bank}}</p>
+  <p>IBAN: {{myclientes.IBAN}}</p>
+  <p>BIC/SWIFT: {{ myclientes.BIC}}</p>
+</div>
+
+
+<p>Back to <a href="/remesas">Clientes</a></p>
+
+{% endblock %}

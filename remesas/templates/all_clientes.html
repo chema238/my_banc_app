@@ -1,0 +1,20 @@
+{% extends "master.html"%}
+
+{% block title %}
+    Aplicacion Banco - Lista de Clientes
+{%endblock%}
+
+{% block content %}
+<div class='mycard'>
+
+
+<h1>Clientes</h1>
+  
+<ul>
+  {% for x in myclientes %}
+    <li onclick="window.location='details/{{x.id}}'">{{ x.Usuario }} {{ x.Orden }}</li>
+  {% endfor %}
+</ul>
+</div>
+<p><a href="/">Home</a></p>
+{%endblock %}
