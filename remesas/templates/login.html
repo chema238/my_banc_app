@@ -1,1 +1,12 @@
+{%extends 'master.html'%}
+
+{%block content%}
+    <h2>Login<h2>
+        <form method="post">
+            {% csrt_token%}
+            {{ form.as_p}}
+            <button type="submit">Login</button>
+        </form>
+{%endblock%}            
+
 admin.site.login = staff_member_required(admin.site.login)

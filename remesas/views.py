@@ -1,13 +1,30 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import Clientes
 from django.contrib.auth.views import LoginView
+from django.views import generic
 # Create your views here.
 
-class CustomLoginView(LoginView):
-    template_name = 'login.html'
-    redirect_authenticated_user = True
+class login(generic.LoginView):
+  def login(request):
+    if request.method == 'POST':
+        form =AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            username= form.cleaned_data.get('username')
+            password= form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect ('login1')
+                                          
+    else:
+        form =AuthenticationForm()
+    return render(request, 'login.html',{'form': form})                
+  
 
 def remesas(request):
     myclientes= Clientes.objects.all().values()
@@ -30,9 +47,4 @@ def main(request):
     return HttpResponse(template.render())
 
 def testing(request):
-  
-  template = loader.get_template('template.html')
-  context = {
-    'fruits': ['Apple', 'Banana', 'Cherry'],   
-  }
-  return HttpResponse(template.render(context,request))
+    return HttpResponse(template.render())
